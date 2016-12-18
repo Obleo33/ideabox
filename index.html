@@ -2,14 +2,23 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
     <meta name="viewport" content="width=device-width, intial-scale=1, user-scalable=true;"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab:700" rel="stylesheet">
     <title>IdeaBox</title>
   </head>
   <body>
-
-
+    <section id="idea-submit">
+      <h1>idea<span>box</span></h1>
+      <form>
+        <input type="text" name="title" id="title-input" placeholder="Title"></input>
+        <textarea type="text" name="body" id="body-input" placeholder="Bodice" rows="3"></textarea>
+        <input type="button" name="save" id="save-button" value="save"></input>
+      </form>
+    </section>
+    <section id="idea-list">
+    </section>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-3.1.1.min.js"><\/script>')</script>
     <script type="text/javascript" src="js/main.js"></script>
