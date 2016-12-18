@@ -9,15 +9,29 @@
     <title>IdeaBox</title>
   </head>
   <body>
+
     <section id="idea-submit">
       <h1>idea<span>box</span></h1>
       <form>
-        <input type="text" name="title" id="title-input" placeholder="Title"></input>
-        <textarea type="text" name="body" id="body-input" placeholder="Bodice" rows="3"></textarea>
-        <input type="button" name="save" id="save-button" value="save"></input>
+        <input type="text" name="title" class="title-input submit" placeholder="Title"></input>
+        <textarea type="text" name="body" class="body-input submit" placeholder="Bodice" rows="3"></textarea>
+        <input type="button" name="save" class="save-button submit" value="save"></input>
       </form>
     </section>
+
     <section id="idea-list">
+      <input type="text" name="search" placeholder="Search" class="search-input submit"></input>
+
+      <!-- <div class="idea-card">
+          <h2>Idea 1</h2>
+          <p>some text</p>
+          <div class="quality">
+            <img src="" alt="">
+            <img src="" alt="">
+            <h3 class="quality">quality: <span class="quality-name">swill</span></h3>
+          </div>
+      </div> -->
+
     </section>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-3.1.1.min.js"><\/script>')</script>
