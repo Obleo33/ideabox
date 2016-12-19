@@ -1,20 +1,32 @@
-var ideaArray = [];
+function testForRobbie() {
+  var ideaString = localStorage.getItem('storedIdeas');
+  if (ideaString === null){
+    localStorage.setItem('storedIdeas','[]')
+  } else {
+    var ideaArray = JSON.parse(ideaString);
+  }
+}
+
+testForRobbie();
 
 $('.save-button').on('click', function() {
-  var ideaTitle = $('.title-input').val;
-  var ideaBody = $('.body-input').val;
+  var ideaTitle = $('.title-input').val();
+  var ideaBody = $('.body-input').val();
   var randoId = '_'+Math.random().toString(36).substr(2, 9);
-  clearInput();
-  var newIdea = new ideaObj(randoId, ideaTitle, ideaBody);
+  var newIdea = new IdeaObj(randoId, ideaTitle, ideaBody);
   submitToStorage(newIdea);
-  makeIdeaCards();
+  prependNewIdea(newIdea);
+  clearInput();
+  console.log(ideaTitle);
+  console.log(ideaBody);
+  console.log(newIdea);
 })
 
 function clearInput() {
   $('.title-input, .body-input').val(null);
 }
 
-function ideaObj(id, title, body) {
+function IdeaObj(id, title, body) {
   this.id = id;
   this.title = title;
   this.body = body;
@@ -22,27 +34,28 @@ function ideaObj(id, title, body) {
 }
 
 function submitToStorage(newIdea) {
+  var ideaString = localStorage.getItem('storedIdeas')
+  var ideaArray = JSON.parse(ideaString);
   ideaArray.push(newIdea);
   var ideaString = JSON.stringify(ideaArray);
   localStorage.setItem('storedIdeas', ideaString);
-  console.log(localStorage);
 }
 
-function makeIdeaCards() {
-  var ideaString = localStorage.getItem('storedIdeas');
-  var ideaArray = JSON.parse(ideaString);
-  ideaArray.forEach(function(v, i){
-    $('idea-list').prepend(
+function prependNewIdea(object){
+  $('#idea-list').prepend(
       `<div class="idea-card">
-          <h2>${this.title}</h2>
-          <p>${this.body}</p>
-          <div class="quality">
-            <img src="" alt="">
-            <img src="" alt="">
-            <h3 class="quality">quality: <span class="quality-name">${this.quality}</span></h3>
-          </div>
-      </div>`
-    );
-  })
-
+            <h2>${object.title}</h2>
+            <p>${object.body}</p>
+            <div class="quality">
+              <img src="" alt="">
+              <img src="" alt="">
+              <h3 class="quality">quality: <span class="quality-name">${object.quality}</span></h3>
+            </div>
+        </div>`);
 }
+
+// function makeIdeaCardsFromStorage(idea) {
+//   var ideaString = localStorage.getItem('storedIdeas');
+//   var ideaArray = JSON.parse(ideaString);
+//   ideaArray.forEach(function(v, i){
+//   })
