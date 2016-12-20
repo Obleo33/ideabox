@@ -1,4 +1,4 @@
-function testForStoredIdeas() {
+function loadStoredIdeas() {
   var ideaString = localStorage.getItem('storedIdeas');
   if (ideaString === null){
     localStorage.setItem('storedIdeas','[]')
@@ -8,7 +8,7 @@ function testForStoredIdeas() {
   }
 }
 
-testForStoredIdeas();
+loadStoredIdeas();
 
 function makeIdeaCardsFromStorage(ideaArray) {
   ideaArray.forEach(function(v, i){
@@ -45,18 +45,32 @@ function submitToStorage(newIdea) {
   localStorage.setItem('storedIdeas', ideaString);
 }
 
+$('.search-input').on('keyup',function (){
+  var searchString = $(this).val().toLowerCase();
+  $('.idea-card').each(function(index,element){
+    var text = $(element).text().toLowerCase();
+    var isAMatch = !!text.match(searchString);
+    $(this).closest('.idea-card').toggle(isAMatch);
+  });
+});
+
 function prependNewIdea(object){
   $('#idea-list').prepend(
-      `<div class="idea-card">
+      `<div class="idea-card" id="${object.id}">
           <section class="idea-head">
-            <h2 contenteditable>${object.title}</h2>
+            <h2 class="idea-title search" contenteditable>${object.title}</h2>
             <div class="delete button"></div>
           </section>
-            <p contenteditable>${object.body}</p>
+            <p class="idea-body search" contenteditable>${object.body}</p>
           <div class="quality">
             <div class="up-vote button"></div>
             <div class="down-vote button"></div>
             <h3 class="quality">quality:&nbsp<span class="quality-name">${object.quality}</span></h3>
           </div>
         </div>`);
+};
+
+$('#idea-list').on('click', '.delete',removeCard);
+function removeCard(){
+  $(this).parents('.idea-card').fadeOut(200,function() { $(this).remove(); });
 };
