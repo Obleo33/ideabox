@@ -10,6 +10,24 @@ function loadStoredIdeas() {
 
 loadStoredIdeas();
 
+function retrieveIdeas() {
+  var ideaString = localStorage.getItem('storedIdeas');
+  return JSON.parse(ideaString);
+}
+
+function removeIdeaFromStorage(id) {
+  function isAMatch(value){
+    return value !== id;
+  }
+  console.log(id)
+  var ideasFromStorage = retrieveIdeas();
+  console.log(ideasFromStorage);
+  var newIdeaArray = ideasFromStorage.filter(isAMatch);
+  console.log(newIdeaArray);
+  var ideaString = JSON.stringify(newIdeaArray);
+  localStorage.setItem('storedIdeas', ideaString)
+}
+
 function makeIdeaCardsFromStorage(ideaArray) {
   ideaArray.forEach(function(v, i){
     prependNewIdea(v);
@@ -56,10 +74,10 @@ $('.search-input').on('keyup',function (){
 
 function prependNewIdea(object){
   $('#idea-list').prepend(
-      `<div class="idea-card" id="${object.id}">
+      `<div class="idea-card">
           <section class="idea-head">
             <h2 class="idea-title search" contenteditable>${object.title}</h2>
-            <div class="delete button"></div>
+            <div class="delete button" id="${object.id}"></div>
           </section>
             <p class="idea-body search" contenteditable>${object.body}</p>
           <div class="quality">
@@ -73,4 +91,5 @@ function prependNewIdea(object){
 $('#idea-list').on('click', '.delete',removeCard);
 function removeCard(){
   $(this).parents('.idea-card').fadeOut(200,function() { $(this).remove(); });
+  removeIdeaFromStorage(this.id);
 };
