@@ -55,6 +55,14 @@ h1 span {
   overflow: scroll;
 }
 
+.idea-card button {
+  height: 20px;
+}
+
+.delete {
+  background-image: url('')
+}
+
 .search-container {
   text-align: center;
 }
