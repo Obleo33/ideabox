@@ -55,12 +55,17 @@ h1 span {
   overflow: scroll;
 }
 
-.idea-card button {
-  height: 20px;
+.idea-card .button {
+  height: 100px;
+  width: 100px;
+  background-image: url('../images/ideabox-sprite.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid red;
 }
 
 .delete {
-  background-image: url('')
+  background-position: 0px 0px;
 }
 
 .search-container {
