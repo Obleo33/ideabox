@@ -55,6 +55,10 @@ h1 span {
   overflow: scroll;
 }
 
+.search-container {
+  text-align: center;
+}
+
 .search-input {
   margin-bottom: 10px;
 }
