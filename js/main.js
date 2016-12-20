@@ -48,13 +48,15 @@ function submitToStorage(newIdea) {
 function prependNewIdea(object){
   $('#idea-list').prepend(
       `<div class="idea-card">
-            <h2>${object.title}</h2>
+          <section class="idea-head">
+            <h2 contenteditable>${object.title}</h2>
             <div class="delete button"></div>
-            <p>${object.body}</p>
-            <div class="quality">
-              <div class="up-vote button"></div>
-              <div class="down-vote button"></div>
-              <h3 class="quality">quality:<span class="quality-name">${object.quality}</span></h3>
-            </div>
+          </section>
+            <p contenteditable>${object.body}</p>
+          <div class="quality">
+            <div class="up-vote button"></div>
+            <div class="down-vote button"></div>
+            <h3 class="quality">quality:&nbsp<span class="quality-name">${object.quality}</span></h3>
+          </div>
         </div>`);
 };
