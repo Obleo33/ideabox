@@ -1,13 +1,20 @@
-function testForRobbie() {
+function testForStoredIdeas() {
   var ideaString = localStorage.getItem('storedIdeas');
   if (ideaString === null){
     localStorage.setItem('storedIdeas','[]')
   } else {
     var ideaArray = JSON.parse(ideaString);
+    makeIdeaCardsFromStorage(ideaArray);
   }
 }
 
-testForRobbie();
+testForStoredIdeas();
+
+function makeIdeaCardsFromStorage(ideaArray) {
+  ideaArray.forEach(function(v, i){
+    prependNewIdea(v);
+  })
+}
 
 $('.save-button').on('click', function() {
   var ideaTitle = $('.title-input').val();
@@ -17,9 +24,6 @@ $('.save-button').on('click', function() {
   submitToStorage(newIdea);
   prependNewIdea(newIdea);
   clearInput();
-  console.log(ideaTitle);
-  console.log(ideaBody);
-  console.log(newIdea);
 })
 
 function clearInput() {
@@ -49,13 +53,7 @@ function prependNewIdea(object){
             <div class="quality">
               <img src="" alt="">
               <img src="" alt="">
-              <h3 class="quality">quality: <span class="quality-name">${object.quality}</span></h3>
+              <h3 class="quality">quality:<span class="quality-name">${object.quality}</span></h3>
             </div>
         </div>`);
-}
-
-// function makeIdeaCardsFromStorage(idea) {
-//   var ideaString = localStorage.getItem('storedIdeas');
-//   var ideaArray = JSON.parse(ideaString);
-//   ideaArray.forEach(function(v, i){
-//   })
+};
