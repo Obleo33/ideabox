@@ -79,11 +79,18 @@ function prependNewIdea(object){
         </div>`);
 };
 
-function updateIdea (id,quality){
+function updateIdea (id,object={}){
   var ideasFromStorage = retrieveIdeas();
-  ideasFromStorage.forEach(function(object,index){
-    if (object.id === id){
-      object.quality = quality;
+  console.log({});
+  ideasFromStorage.forEach(function(idea,index){
+    if (idea.id === id){
+      if (object.quality !== undefined){
+        idea.quality = object.quality;
+      } else if (object.title !== undefined){
+        idea.title = object.title;
+      } else if (object.body !== undefined){
+        idea.body = object.body;
+      }
     }
   });
   backToStorage(ideasFromStorage);
@@ -100,7 +107,7 @@ $('#idea-list').on('click', '.up-vote',function(){
   var thisCardID = $(this).parents('.idea-card').attr('id')
   var newQuality = $quality.text()
 
-  updateIdea (thisCardID, newQuality)
+  updateIdea (thisCardID, {quality: newQuality})
 });
 
 $('#idea-list').on('click', '.down-vote',function(){
@@ -114,7 +121,19 @@ $('#idea-list').on('click', '.down-vote',function(){
   var thisCardID = $(this).parents('.idea-card').attr('id')
   var newQuality = $quality.text()
 
-  updateIdea (thisCardID, newQuality)
+  updateIdea (thisCardID, {quality: newQuality})
+});
+
+$('#idea-list').on('blur','.idea-title', function(){
+  var newIdeaTxt = $(this).text();
+  var thisCardID = $(this).parents('.idea-card').attr('id');
+  updateIdea (thisCardID,{title: newIdeaTxt})
+});
+
+('#idea-list').on('blur','.body-title', function(){
+  var newBodyTxt = $(this).text();
+  var thisCardID = $(this).parents('.idea-card').attr('id');
+  updateIdea (thisCardID,{body: newBodyTxt})
 });
 
 
