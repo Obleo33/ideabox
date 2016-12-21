@@ -81,7 +81,6 @@ function prependNewIdea(object){
 
 function updateIdea (id,object={}){
   var ideasFromStorage = retrieveIdeas();
-  console.log({});
   ideasFromStorage.forEach(function(idea,index){
     if (idea.id === id){
       if (object.quality !== undefined){
@@ -142,7 +141,6 @@ function removeCard(){
   var thisCardID = $(this).parents('.idea-card').attr('id');
   $(this).parents('.idea-card').fadeOut(200,function() { $(this).remove(); });
   removeIdeaFromStorage(thisCardID);
-
 };
 
 function removeIdeaFromStorage(id) {
