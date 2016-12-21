@@ -60,10 +60,10 @@ $('.search-input').on('keyup',function (){
 
 function prependNewIdea(object){
   $('#idea-list').prepend(
-      `<div class="idea-card">
+      `<div class="idea-card" id="${object.id}">
           <section class="idea-head">
             <h2 class="idea-title search" contenteditable>${object.title}</h2>
-            <div class="delete button" id="${object.id}"></div>
+            <div class="delete button"></div>
           </section>
             <p class="idea-body search" contenteditable>${object.body}</p>
           <div class="quality">
@@ -74,20 +74,40 @@ function prependNewIdea(object){
         </div>`);
 };
 
+function updateIdea (){
+  var ideasFromStorage = retrieveIdeas();
+  ideasFromStorage.forEach(id)
+}
+
 $('#idea-list').on('click', '.up-vote',function(){
-  var quality = $(this).sibling('.quality-name  a')
-  console.log(quality);
-  if (quality === "swill"){
-    $('.quality-name',this).text('plausible');
-  } else if (quality === 'plausible'){
-    $('.quality-name',this).text('genius');
+  var $quality = $(this).siblings("h3").find('.quality-name');
+  if ($quality.text() === 'swill'){
+    $quality.text('plausible')
+  } else if ($quality.text() === 'plausible'){
+      $quality.text('genius')
   }
-})
+  console.log($quality.text())
+  console.log($(this).parents('.idea-card').attr('id'))
+});
+
+$('#idea-list').on('click', '.down-vote',function(){
+  var $quality = $(this).siblings("h3").find('.quality-name');
+  if ($quality.text() === 'genius'){
+    $quality.text('plausible')
+  } else if ($quality.text() === 'plausible'){
+      $quality.text('swill')
+  }
+  console.log($quality.text())
+  console.log($(this).parents('.idea-card').attr('id'))
+});
+
 
 $('#idea-list').on('click', '.delete',removeCard);
 function removeCard(){
+  var thisCardID = $(this).parents('.idea-card').attr('id');
   $(this).parents('.idea-card').fadeOut(200,function() { $(this).remove(); });
-  removeIdeaFromStorage(this.id);
+  removeIdeaFromStorage(thisCardID);
+
 };
 
 function removeIdeaFromStorage(id) {
