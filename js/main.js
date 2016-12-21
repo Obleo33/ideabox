@@ -49,6 +49,11 @@ function submitToStorage(newIdea) {
   localStorage.setItem('storedIdeas', ideaString);
 }
 
+function backToStorage(array){
+  var ideaString = JSON.stringify(array);
+  localStorage.setItem('storedIdeas', ideaString);
+}
+
 $('.search-input').on('keyup',function (){
   var searchString = $(this).val().toLowerCase();
   $('.idea-card').each(function(index,element){
@@ -74,10 +79,15 @@ function prependNewIdea(object){
         </div>`);
 };
 
-function updateIdea (){
+function updateIdea (id,quality){
   var ideasFromStorage = retrieveIdeas();
-  ideasFromStorage.forEach(id)
-}
+  ideasFromStorage.forEach(function(object,index){
+    if (object.id === id){
+      object.quality = quality;
+    }
+  });
+  backToStorage(ideasFromStorage);
+};
 
 $('#idea-list').on('click', '.up-vote',function(){
   var $quality = $(this).siblings("h3").find('.quality-name');
@@ -86,8 +96,11 @@ $('#idea-list').on('click', '.up-vote',function(){
   } else if ($quality.text() === 'plausible'){
       $quality.text('genius')
   }
-  console.log($quality.text())
-  console.log($(this).parents('.idea-card').attr('id'))
+
+  var thisCardID = $(this).parents('.idea-card').attr('id')
+  var newQuality = $quality.text()
+
+  updateIdea (thisCardID, newQuality)
 });
 
 $('#idea-list').on('click', '.down-vote',function(){
@@ -97,8 +110,11 @@ $('#idea-list').on('click', '.down-vote',function(){
   } else if ($quality.text() === 'plausible'){
       $quality.text('swill')
   }
-  console.log($quality.text())
-  console.log($(this).parents('.idea-card').attr('id'))
+
+  var thisCardID = $(this).parents('.idea-card').attr('id')
+  var newQuality = $quality.text()
+
+  updateIdea (thisCardID, newQuality)
 });
 
 
