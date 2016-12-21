@@ -130,7 +130,7 @@ $('#idea-list').on('blur','.idea-title', function(){
   updateIdea (thisCardID,{title: newIdeaTxt})
 });
 
-('#idea-list').on('blur','.body-title', function(){
+$('#idea-list').on('blur','.idea-body', function(){
   var newBodyTxt = $(this).text();
   var thisCardID = $(this).parents('.idea-card').attr('id');
   updateIdea (thisCardID,{body: newBodyTxt})

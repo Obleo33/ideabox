@@ -3,14 +3,18 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100vw;
 }
 
 #idea-submit {
   background-color: #e5f3f2;
   height: 50%;
-  text-align: center;
+  /*text-align: center;*/
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   /*justify-content: space-between;*/
 }
 
@@ -22,15 +26,24 @@ h1 {
   margin: 20px 0;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
 .submit {
-  width: 85%;
   margin: 10px 0;
   font-size: 20PX;
-  width: 85%;
   border: 1px solid #c7c7cd;
 }
 
+.title-input {
+  display: flex;
+}
+
 .body-input {
+  display: flex;
   resize: none;
 }
 
@@ -52,6 +65,7 @@ h1 span {
 
 .search-input {
   margin-bottom: 10px;
+  width: 90%;
 }
 
 #idea-list {
@@ -65,7 +79,7 @@ h1 span {
 
 .idea-card {
   text-align: left;
-  width: 85%;
+  width: 90%;
   border-bottom: 1px solid #d1d3d4;
   color: #939598;
   margin: auto;
@@ -134,4 +148,17 @@ h1 span {
   background-image: url('../images/downvote-hover.svg');
 }
 
-@ max-width 600px
+@media screen and (min-width: 600px) {
+
+  form {
+    width: 540px;
+  }
+
+  .idea-card {
+    width: 540px;
+  }
+
+  .search-input {
+    width: 540px;
+  }
+}
